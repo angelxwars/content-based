@@ -1,5 +1,5 @@
 import pandas as pd
-import stop_words as stopwords
+#import stop_words as stopwords
 from sklearn.metrics.pairwise import pairwise_distances
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
@@ -13,8 +13,8 @@ class ContentBased(object):
     """
 
     def __init__(self, stop_words=None, token_pattern=None, metric='cosine', n_neighbors=5):
-        if stop_words is None:
-            stop_words = stopwords.get_stop_words("english")
+        #if stop_words is None:
+            #stop_words = stopwords.get_stop_words("english")
 
         if token_pattern is None:
             token_pattern = '(?u)\\b[a-zA-Z]\\w\\w+\\b'
