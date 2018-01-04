@@ -8,13 +8,11 @@ import numpy as np
 
 class ContentBased(object):
     """
-    Modelo de recomendación de articulos basados en tags.
-    El modelo vectoriza cada articulo para poder calcular la similitud.
+    Modelo de recomendación de recetas basado en ingredientes.
+    Vectorizamos cada receta para conocer las mas cercanas
     """
 
     def __init__(self, stop_words=None, token_pattern=None, metric='cosine', n_neighbors=5):
-        #if stop_words is None:
-            #stop_words = stopwords.get_stop_words("english")
 
         if token_pattern is None:
             token_pattern = '(?u)\\b[a-zA-Z]\\w\\w+\\b'
@@ -25,16 +23,16 @@ class ContentBased(object):
     def fit(self, datos, columna_descripcion):
         """
         Entrenamos el modelo:
-        1/ Vectorizacion de cada articulo (Extracción y ponderación de atributos)
-        2/ Calculamos los articulos mas cercanos
+        1- Vectorizamos cada receta
+        2- Calculamos las recetas mas cercanos
         """
         self.datos = datos
-        datos_por_tags = self.tfidf_vectorizer.fit_transform(datos[columna_descripcion])
+        datos_por_tags = self.tfidf_vectorizer.fit_transform(datos[columna_descripcion].values.astype('U'))
         self.nearest_neigbors.fit(datos_por_tags)
 
     def predict(self, descripcion):
         """
-        Devuelve los articulos mas parecidos a la descripcion propuesta
+        Devolverá la receta que mas parecida sea en la cadena de ingredientes
         """
         descripcion_tags = self.tfidf_vectorizer.transform(descripcion)
         if descripcion_tags.sum() == 0:

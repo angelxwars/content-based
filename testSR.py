@@ -6,10 +6,7 @@ import contentBased as CB
 datos = pd.read_csv("recipes.csv", error_bad_lines=False)
 datos.head(3)
 
-
-print(datos)
-
 content_based = CB.ContentBased()
 content_based.fit(datos, 'recipe_str')
 
-print(content_based.predict(['Almendra Mayonesa gelatina']))
+print(content_based.predict(['Mayonesa patata']))
